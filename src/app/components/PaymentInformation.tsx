@@ -1,11 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react'
 import NumberInput from './NumberInput';
+import { AccountType } from '../enums';
 
-enum AccountType {
-	Checking,
-	Savings
-}
 
 type Value = {
     value: string,

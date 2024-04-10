@@ -6,9 +6,10 @@ interface NumberInputProps {
 	value: string,
 	handleChange: Function,
 	errorMessage: string,
+	isCurrency?: boolean,
 }
 
-const NumberInput = ({ title, defaultText, value, handleChange, errorMessage }: NumberInputProps) => {
+const NumberInput = ({ title, defaultText, value, handleChange, errorMessage, isCurrency }: NumberInputProps) => {
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputText = event.target.value;
 		if (!isNaN(+inputText)) {

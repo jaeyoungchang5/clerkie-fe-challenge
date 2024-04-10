@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PaymentInformation from './PaymentInformation'
+import PaymentDetails from './PaymentDetails'
 
 const PaymentForm = () => {
 
@@ -7,6 +8,7 @@ const PaymentForm = () => {
 		<div>
 			<form>
 				<PaymentInformation />
+				<PaymentDetails />
 			</form>
 		</div>
 	)
