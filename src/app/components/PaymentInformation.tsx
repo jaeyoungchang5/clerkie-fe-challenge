@@ -2,38 +2,34 @@
 import React, { useEffect, useState } from 'react'
 import NumberInput from './NumberInput';
 import { AccountType } from '../enums';
+import { Value } from '../types';
 
-
-type Value = {
-    value: string,
-    errorMessage: string,
-}
 
 const PaymentInformation = () => {
-	const [accountNumber, setAccountNumber] = useState<Value>( {value: '', errorMessage: ''} );
-	const [accountNumberConfirm, setAccountNumberConfirm] = useState<Value>( {value: '', errorMessage: ''} );
-	const [routingNumber, setRoutingNumber] = useState<Value>( {value: '', errorMessage: ''} );
+	const [accountNumber, setAccountNumber] = useState<Value>( {value: 0, errorMessage: ''} );
+	const [accountNumberConfirm, setAccountNumberConfirm] = useState<Value>( {value: 0, errorMessage: ''} );
+	const [routingNumber, setRoutingNumber] = useState<Value>( {value: 0, errorMessage: ''} );
 	const [accountType, setAccountType] = useState<AccountType>(AccountType.Checking);
 
-    function handleAccountChange(value: string) {
+    function handleAccountChange(value: number) {
         if (isNaN(+value)) {
             return;
         }
-        validateAccountInput(value, accountNumberConfirm.value);
+        validateAccountInput(+value, accountNumberConfirm.value);
     }
 
-    function handleAccountConfirmChange(value: string) {
+    function handleAccountConfirmChange(value: number) {
         if (isNaN(+value)) {
             return;
         }
-        validateAccountInput(accountNumber.value, value);
+        validateAccountInput(accountNumber.value, +value);
     }
 
-    function handleRoutingChange(value: string) {
+    function handleRoutingChange(value: number) {
         if (isNaN(+value)) {
             return;
         }
-        if (value === '' || validateRoutingValue(value)) {
+        if (value === 0 || validateRoutingValue(value)) {
             setRoutingNumber({
                 value: value,
                 errorMessage: ''
@@ -46,37 +42,37 @@ const PaymentInformation = () => {
         }
     }
 
-    function validateAccountInput(accountNumberValue: string, accountNumberConfirmValue: string) {
-        if (accountNumberValue === '' || validateAccountValue(accountNumberValue)) {
+    function validateAccountInput(accountNumberValue: number, accountNumberConfirmValue: number) {
+        if (accountNumberValue === 0 || validateAccountValue(accountNumberValue)) {
             updateAccountNumber(accountNumberValue, true, '');
         } else {
             updateAccountNumber(accountNumberValue, false, 'Account number is invalid');
         }
-        if (accountNumberConfirmValue === '' || accountNumberValue === accountNumberConfirmValue) {
+        if (accountNumberConfirmValue === 0 || accountNumberValue === accountNumberConfirmValue) {
             updateAccountConfirmNumber(accountNumberConfirmValue, true, '');
         } else {
             updateAccountConfirmNumber(accountNumberConfirmValue, false, 'Account numbers do not match');
         }        
     }
 
-    function validateAccountValue(value: string): boolean {
+    function validateAccountValue(value: number): boolean {
         const regex = new RegExp('^[0-9]{9,18}$');
-        return regex.test(value);
+        return regex.test(value.toString());
     }
 
-    function validateRoutingValue(value: string): boolean {
+    function validateRoutingValue(value: number): boolean {
         const regex = new RegExp('^[0-9]{9}$');
-        return regex.test(value);
+        return regex.test(value.toString());
     }
 
-    function updateAccountNumber(accountNumberValue: string, isValid: boolean, errorMessage: string) {
+    function updateAccountNumber(accountNumberValue: number, isValid: boolean, errorMessage: string) {
         setAccountNumber({
             value: accountNumberValue,
             errorMessage: errorMessage
         });
     }
 
-    function updateAccountConfirmNumber(accountNumberValue: string, isValid: boolean, errorMessage: string) {
+    function updateAccountConfirmNumber(accountNumberValue: number, isValid: boolean, errorMessage: string) {
         setAccountNumberConfirm({
             value: accountNumberValue,
             errorMessage: errorMessage
@@ -89,23 +85,20 @@ const PaymentInformation = () => {
             <NumberInput 
                 title={'Account Number'}
                 defaultText={'Account number'}
-                value={accountNumber.value}
+                value={accountNumber}
                 handleChange={handleAccountChange}
-                errorMessage={accountNumber.errorMessage}
             />
             <NumberInput 
                 title={'Confirm Account Number'}
                 defaultText={'Account number'}
-                value={accountNumberConfirm.value}
+                value={accountNumberConfirm}
                 handleChange={handleAccountConfirmChange}
-                errorMessage={accountNumberConfirm.errorMessage}
             />
             <NumberInput 
                 title={'Routing Number'}
                 defaultText={'Routing number'}
-                value={routingNumber.value}
+                value={routingNumber}
                 handleChange={handleRoutingChange}
-                errorMessage={routingNumber.errorMessage}
             />
         </div>
     )

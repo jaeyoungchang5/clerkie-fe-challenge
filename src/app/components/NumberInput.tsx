@@ -1,19 +1,19 @@
 import React from 'react'
+import { Value } from '../types';
 
 interface NumberInputProps {
 	title: string,
 	defaultText: string,
-	value: string,
+	value: Value,
 	handleChange: Function,
-	errorMessage: string,
 	isCurrency?: boolean,
 }
 
-const NumberInput = ({ title, defaultText, value, handleChange, errorMessage, isCurrency }: NumberInputProps) => {
+const NumberInput = ({ title, defaultText, value, handleChange, isCurrency }: NumberInputProps) => {
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputText = event.target.value;
 		if (!isNaN(+inputText)) {
-			handleChange(inputText);
+			handleChange(+inputText);
 		}
 	}
 
@@ -22,13 +22,13 @@ const NumberInput = ({ title, defaultText, value, handleChange, errorMessage, is
 			<label>
 			{title}
 			<input
-				value={value}
+				value={value.value}
 				placeholder={defaultText}
 				onChange={handleInputChange}
-				className={`border-2 focus:border-3 focus:outline-none focus:ring-0 ${!errorMessage ? 'focus:border-blue-700 ' : 'border-red-600 focus:border-red-500'}`}
+				className={`border-2 focus:border-3 focus:outline-none focus:ring-0 ${!value.errorMessage ? 'focus:border-blue-700 ' : 'border-red-600 focus:border-red-500'}`}
 				maxLength={30}
 			/>
-			{errorMessage}
+			{value.errorMessage}
 			</label>
 		</div>
 	)

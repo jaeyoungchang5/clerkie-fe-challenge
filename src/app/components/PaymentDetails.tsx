@@ -37,9 +37,8 @@ const PaymentDetails = () => {
             <NumberInput
                 title={'Payment Amount'}
                 defaultText={'0.00'}
-                value={paymentAmount.value.toString()}
+                value={paymentAmount}
                 handleChange={handlePaymentAmountChange}
-                errorMessage={paymentAmount.errorMessage}
             />
 
             <AccountLists accounts={accounts} paymentAmount={paymentAmount} totalBalance={totalBalance} />

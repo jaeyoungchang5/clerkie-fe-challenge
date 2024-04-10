@@ -1,6 +1,6 @@
 export type Value = {
     value: number,
-    errorMessage: string,
+    errorMessage?: string,
 }
 
 export type AccountDetails = {
