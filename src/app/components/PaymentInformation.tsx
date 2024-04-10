@@ -7,15 +7,15 @@ enum AccountType {
 	Savings
 }
 
-type PaymentValue = {
+type Value = {
     value: string,
     errorMessage: string,
 }
 
 const PaymentInformation = () => {
-	const [accountNumber, setAccountNumber] = useState<PaymentValue>( {value: '', errorMessage: ''} );
-	const [accountNumberConfirm, setAccountNumberConfirm] = useState<PaymentValue>( {value: '', errorMessage: ''} );
-	const [routingNumber, setRoutingNumber] = useState<PaymentValue>( {value: '', errorMessage: ''} );
+	const [accountNumber, setAccountNumber] = useState<Value>( {value: '', errorMessage: ''} );
+	const [accountNumberConfirm, setAccountNumberConfirm] = useState<Value>( {value: '', errorMessage: ''} );
+	const [routingNumber, setRoutingNumber] = useState<Value>( {value: '', errorMessage: ''} );
 	const [accountType, setAccountType] = useState<AccountType>(AccountType.Checking);
 
     function handleAccountChange(value: string) {
@@ -90,22 +90,22 @@ const PaymentInformation = () => {
         <div>
             Payment Information
             <NumberInput 
-                title={"Account Number"}
-                defaultText={"Account number"}
+                title={'Account Number'}
+                defaultText={'Account number'}
                 value={accountNumber.value}
                 handleChange={handleAccountChange}
                 errorMessage={accountNumber.errorMessage}
             />
             <NumberInput 
-                title={"Confirm Account Number"}
-                defaultText={"Account number"}
+                title={'Confirm Account Number'}
+                defaultText={'Account number'}
                 value={accountNumberConfirm.value}
                 handleChange={handleAccountConfirmChange}
                 errorMessage={accountNumberConfirm.errorMessage}
             />
             <NumberInput 
-                title={"Routing Number"}
-                defaultText={"Routing number"}
+                title={'Routing Number'}
+                defaultText={'Routing number'}
                 value={routingNumber.value}
                 handleChange={handleRoutingChange}
                 errorMessage={routingNumber.errorMessage}
