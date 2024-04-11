@@ -16,9 +16,9 @@ const PaymentDetails = () => {
 
     const totalBalance = accounts.reduce((sum, current) => sum + current.balance, 0);
 
-    useEffect(() => {
-        updateAccounts(accounts)
-    }, [paymentAmount]);
+    // useEffect(() => {
+    //     updateAccounts(accounts)
+    // }, [paymentAmount]);
 
     function updateAccounts(accountsObj: AccountDetails[]) {
         let subtotal: number = accountsObj.reduce((sum, current) => sum + (current.isSelected ? current.balance : 0), 0);
@@ -39,7 +39,7 @@ const PaymentDetails = () => {
             }
             return {...account, isSelected: isChecked}
         })
-        
+
         updateAccounts(updatedList);
     }
 
@@ -49,6 +49,19 @@ const PaymentDetails = () => {
         }
 
         setPaymentAmount(value);
+        updateAccounts(accounts);
+    }
+
+    function handleAccountPaymentChange(name: string, value: number) {
+        let updatedList: AccountDetails[] = accounts.map(account => {
+            if (account.name !== name) {
+                return account;
+            }
+
+            setPaymentAmount((paymentAmount || 0) + value - account.accountPayment);
+            return {...account, accountPayment: value}
+        })
+        setAccounts(updatedList)
     }
 
     return (
@@ -70,7 +83,7 @@ const PaymentDetails = () => {
                         key={key} 
                         account={account} 
                         updateChecked={handleCheckedUpdate}
-                        updatePaymentAmount={handlePaymentAmountChange}
+                        updatePaymentAmount={handleAccountPaymentChange}
                     />
                 )
             })}

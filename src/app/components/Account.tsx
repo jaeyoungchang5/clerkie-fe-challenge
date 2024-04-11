@@ -5,7 +5,7 @@ import Input from './Input';
 interface AccountProps {
     account: AccountDetails,
     updateChecked: (name: string, isChecked: boolean) => void,
-    updatePaymentAmount: (value: number) => void
+    updatePaymentAmount: (name: string, value: number) => void
 }
 
 const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) => {
@@ -21,6 +21,7 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
     }, [account])
 
     function handleChange(value: number) {
+        updatePaymentAmount(account.name, value)
     }
 
     function handleCheck(event: React.ChangeEvent<HTMLInputElement>) {
