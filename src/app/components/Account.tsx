@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AccountDetails } from '../types';
-import Input from './Input';
+import CurrencyInput from './CurrencyInput';
 
 interface AccountProps {
     account: AccountDetails,
@@ -31,12 +31,11 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
     return (
         <div>
             Account {account.name} | Balance: ${account.balance} | Payment:
-            <Input 
-                label={''}
-                defaultText={'$0.00'}
+            <CurrencyInput 
                 value={account.accountPayment}
                 errorMessage={errorMessage}
-                handleChange={handleChange}
+                disabled={!account.isSelected}
+                onChange={handleChange}
             />
             <input type='checkbox' checked={account.isSelected} onChange={handleCheck} />
         </div>

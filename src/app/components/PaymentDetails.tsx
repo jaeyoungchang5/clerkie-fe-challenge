@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react'
-import Input from './Input'
+import CurrencyInput from './CurrencyInput';
 import AccountsHeader from './AccountsHeader';
 import { AccountDetails, Value } from '../types';
 import Account from './Account';
@@ -16,17 +16,13 @@ const PaymentDetails = () => {
 
     const totalBalance = accounts.reduce((sum, current) => sum + current.balance, 0);
 
-    // useEffect(() => {
-    //     updateAccounts(accounts)
-    // }, [paymentAmount]);
-
-    function updateAccounts(accountsObj: AccountDetails[]) {
+    function updateAccounts(accountsObj: AccountDetails[], totalPayment: number) {
         let subtotal: number = accountsObj.reduce((sum, current) => sum + (current.isSelected ? current.balance : 0), 0);
         let updatedList: AccountDetails[] = accountsObj.map(account => {
-            if (!account.isSelected || !paymentAmount) {
+            if (!account.isSelected) {
                 return {...account, accountPayment: 0}
             } else {
-                return {...account, accountPayment: (account.balance / subtotal) * paymentAmount}
+                return {...account, accountPayment: (account.balance / subtotal) * totalPayment}
             }
         })
         setAccounts(updatedList);
@@ -40,16 +36,17 @@ const PaymentDetails = () => {
             return {...account, isSelected: isChecked}
         })
 
-        updateAccounts(updatedList);
+        updateAccounts(updatedList, paymentAmount ?? 0);
     }
 
     function handlePaymentAmountChange(value: number) {
+        console.log(`handling payments from payment details: ${value}`)
         if (isNaN(value)) {
             return;
         }
 
         setPaymentAmount(value);
-        updateAccounts(accounts);
+        updateAccounts(accounts, value ?? 0);
     }
 
     function handleAccountPaymentChange(name: string, value: number) {
@@ -67,12 +64,12 @@ const PaymentDetails = () => {
     return (
         <div>
             Payment Detail
-            <Input
+            <CurrencyInput
                 label={'Payment Amount'}
-                defaultText={'$0.00'}
                 value={paymentAmount}
                 errorMessage={paymentErrorMessage}
-                handleChange={handlePaymentAmountChange}
+                onChange={handlePaymentAmountChange}
+                disabled={false}
             />
  
             <AccountsHeader numSelectedAccounts={3} totalBalance={totalBalance} />
