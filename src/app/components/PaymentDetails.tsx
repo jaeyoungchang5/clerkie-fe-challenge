@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import CurrencyInput from './CurrencyInput';
 import AccountsHeader from './AccountsHeader';
 import { AccountDetails, Value } from '../types';
@@ -13,6 +13,10 @@ const PaymentDetails = () => {
         { name: 'B', balance: 14901, isSelected: false, accountPayment: 0 },
         { name: 'C', balance:  5438, isSelected: false, accountPayment: 0 },
     ]);
+
+    useEffect(() => {
+        validatePaymentInput(paymentAmount);
+    }, [paymentAmount])
 
     const numSelectedAccounts: number = useMemo((): number => {
         console.log('updating');
@@ -63,6 +67,14 @@ const PaymentDetails = () => {
             return {...account, accountPayment: value}
         })
         setAccounts(updatedList)
+    }
+
+    function validatePaymentInput(value: number) {
+        let tempErrorMessage: string = '';
+        if (value > totalBalance) {
+            tempErrorMessage = 'Payment cannot exceed total balance';
+        }
+        setPaymentErrorMessage(tempErrorMessage);
     }
 
     return (

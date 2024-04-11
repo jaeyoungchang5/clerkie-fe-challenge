@@ -5,6 +5,8 @@ import PaymentDetails from './PaymentDetails'
 import Button from './Button';
 
 const PaymentForm = () => {
+	const [isPaymentInfoValid, setIsPaymentInfoValid] = useState<boolean>(true);
+	const [isPaymentDetailValid, setIsPaymentDetailValid] = useState<boolean>(true);
 	function onSubmit(event: FormEvent<HTMLFormElement>) {
 		
 	}
