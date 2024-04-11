@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import CurrencyInput from './CurrencyInput';
 import AccountsHeader from './AccountsHeader';
 import { AccountDetails, Value } from '../types';
@@ -13,6 +13,11 @@ const PaymentDetails = () => {
         { name: 'B', balance: 14901, isSelected: false, accountPayment: 0 },
         { name: 'C', balance:  5438, isSelected: false, accountPayment: 0 },
     ]);
+
+    const numSelectedAccounts: number = useMemo((): number => {
+        console.log('updating');
+        return accounts.reduce((sum, current) => sum + (current.isSelected ? 1 : 0), 0);
+    }, [accounts]);
 
     const totalBalance = accounts.reduce((sum, current) => sum + current.balance, 0);
 
@@ -71,7 +76,7 @@ const PaymentDetails = () => {
                 disabled={false}
             />
  
-            <AccountsHeader numSelectedAccounts={3} totalBalance={totalBalance} />
+            <AccountsHeader numSelectedAccounts={numSelectedAccounts} totalBalance={totalBalance} />
 
             {Object.entries(accounts).map(([ key, account ]) => {
                 return (

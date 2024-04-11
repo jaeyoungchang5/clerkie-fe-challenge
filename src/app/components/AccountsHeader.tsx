@@ -8,7 +8,7 @@ interface AccountsHeaderProps {
 const AccountsHeader = ({ numSelectedAccounts, totalBalance }: AccountsHeaderProps) => {
     return (
         <div>
-            Account Lists: {numSelectedAccounts} Accounts Selected
+            Account Lists: {numSelectedAccounts} Account{numSelectedAccounts !== 1 && 's'} Selected
             <p>Total Balance: ${totalBalance}</p>
 
         </div>
