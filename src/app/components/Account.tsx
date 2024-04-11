@@ -1,21 +1,44 @@
 import React, { useEffect, useState } from 'react'
-import { AccountDetails, Value } from '../types';
+import { AccountDetails } from '../types';
+import Input from './Input';
 
 interface AccountProps {
     account: AccountDetails,
-    paymentAmount: Value,
-    totalBalance: number,
+    updateChecked: (name: string, isChecked: boolean) => void,
+    updatePaymentAmount: (value: number) => void
 }
 
-const Account = ({ account, paymentAmount, totalBalance }: AccountProps) => {
-    const [payment, setPayment] = useState<number>(0);
+const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) => {
+    const [errorMessage, setErrorMessage] = useState<string>('');
 
     useEffect(() => {
-        setPayment( (account.balance / totalBalance) * paymentAmount.value );
-    }, [paymentAmount])
+        if (account.accountPayment > account.balance) {
+            setErrorMessage('Payment cannot exceed account balance')
+        } else {
+            setErrorMessage('');
+        }
+
+    }, [account])
+
+    function handleChange(value: number) {
+    }
+
+    function handleCheck(event: React.ChangeEvent<HTMLInputElement>) {
+        updateChecked(account.name, event.target.checked);
+    }
 
     return (
-        <div>Account {account.name} | Balance: ${account.balance} | Payment: ${payment.toFixed(2)}</div>
+        <div>
+            Account {account.name} | Balance: ${account.balance} | Payment:
+            <Input 
+                label={''}
+                defaultText={'$0.00'}
+                value={account.accountPayment}
+                errorMessage={errorMessage}
+                handleChange={handleChange}
+            />
+            <input type='checkbox' checked={account.isSelected} onChange={handleCheck} />
+        </div>
     )
 }
 

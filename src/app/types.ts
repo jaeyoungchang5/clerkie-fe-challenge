@@ -7,4 +7,5 @@ export type AccountDetails = {
     name: string,
     balance: number,
     isSelected: boolean,
+    accountPayment: number,
 }
