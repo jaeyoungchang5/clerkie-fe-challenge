@@ -1,12 +1,12 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import CurrencyInput from './CurrencyInput';
 import AccountsHeader from './AccountsHeader';
 import { AccountDetails, Value } from '../types';
 import Account from './Account';
 
 const PaymentDetails = () => {
-    const [paymentAmount, setPaymentAmount] = useState<number>();
+    const [paymentAmount, setPaymentAmount] = useState<number>(0);
     const [paymentErrorMessage, setPaymentErrorMessage] = useState<string>('');
     const [accounts, setAccounts] = useState<AccountDetails[]>([
         { name: 'A', balance: 45156, isSelected: false, accountPayment: 0 },
@@ -40,7 +40,6 @@ const PaymentDetails = () => {
     }
 
     function handlePaymentAmountChange(value: number) {
-        console.log(`handling payments from payment details: ${value}`)
         if (isNaN(value)) {
             return;
         }

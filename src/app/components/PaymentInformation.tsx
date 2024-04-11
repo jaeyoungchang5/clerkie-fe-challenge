@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react'
 import Input from './Input';
-import { AccountType, InputType } from '../enums';
+import { AccountType } from '../enums';
 
 
 const PaymentInformation = () => {

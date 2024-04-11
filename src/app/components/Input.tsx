@@ -10,7 +10,6 @@ interface InputProps {
 }
 
 const Input = ({ label, defaultText, value, errorMessage, disabled = false, onChange }: InputProps) => {
-	console.log(`${label} ${value}`);
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		onChange(event.target.value);
 	}

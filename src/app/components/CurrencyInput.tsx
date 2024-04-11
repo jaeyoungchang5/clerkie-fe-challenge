@@ -1,49 +1,27 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 interface CurrencyInputProps {
 	label?: string,
 	defaultText?: string,
-	value: number | undefined, // pass undefined for value if you want the default text to show up
+	value: number,
 	errorMessage: string,
 	disabled: boolean,
 	onChange: (value: number) => void,
 }
 
 const CurrencyInput = ({ label, defaultText = '$0.00', value, errorMessage, disabled, onChange }: CurrencyInputProps) => {
-    console.log(`rendering currrencyInput with value: ${value}`)
-    const decimalSeparator: string = '.';
-    const groupSeparator: string = ',';
-    const formattedValue: string = value ? `$${value.toString()}` : ''
-    // const [formattedValue, setFormattedValue] = useState<string>(() => {
-    //     return value ? `$${value.toString()}` : '';
-    // })
-
-    const [dirty, setDirty] = useState(false);
-    const [cursor, setCursor] = useState(0);
-    const [changeCount, setChangeCount] = useState(0);
-    const [lastKeyStroke, setLastKeyStroke] = useState<string | null>(null);
-
-    const getFormattedString = (): string => {
+    const formattedString: string = useMemo((): string => {
         if (!value) {
-            return formattedValue
-        
+            return ''
         }
-        // const regex = new RegExp('^[\$\.]$')
-        // const match = value.match(regex);
-        // console.log(match);
-        return formatValue(value)
-    }
-
-    function formatValue(rawValue: number): string {
-        
-        return ''
-    }
-
+        let temp: string = value.toFixed(2);
+        temp = temp.replace(/(\d)(?=(\d{3})+(\.(\d){0,2})$)/g, '$1,')
+        return `$${temp}`
+    }, [value]);
 
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const inputText = event.target.value;
-        let numberValue = inputText.replace('$', '');
-        console.log(`handling input change: ${numberValue}`);
+        let numberValue = inputText.replace(/[\$,-]/g, '');
 		if (!isNaN(+numberValue)) {
 			onChange(+numberValue);
 		}
@@ -56,13 +34,12 @@ const CurrencyInput = ({ label, defaultText = '$0.00', value, errorMessage, disa
         }
     }
 
-
 	return (
 		<div>
 			<label>
 				{label}
 				<input
-					value={formattedValue}
+					value={formattedString}
 					placeholder={defaultText}
 					onChange={handleInputChange}
                     onKeyUp={handleOnKeyUp}
