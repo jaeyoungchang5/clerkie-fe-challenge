@@ -21,7 +21,7 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 				disabled={disabled}
 				autoComplete='off'
 			/>
-			<p hidden={errorMessage === ''} className='italic text-red-600 text-sm'>
+			<p hidden={errorMessage === ''} className={`italic text-red-600 text-xs ${extraInputClasses}`}>
 				{errorMessage}
 			</p>
 		</div>

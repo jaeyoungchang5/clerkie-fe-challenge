@@ -4,7 +4,7 @@ import { AccountInfoProps, AccountProps } from '../../types/';
 import { numToCurrency, isValidAccountPayment } from '@/app/utilities/';
 
 const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) => {
-    const errorMessage = !isValidAccountPayment(account) ? 'Payment cannot exceed amount balance' : '';
+    const errorMessage = !isValidAccountPayment(account) ? 'Payment exceeds account balance' : '';
 
     function handleChange(value: number) {
         updatePaymentAmount(account.name, value)
