@@ -99,7 +99,7 @@ const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
                 <div className='mb-4'>
                     <Title title='Payment Detail' />
                 </div>
-                <div className='grid grid-cols-1 md:grid-cols-2'>
+                <div className='grid grid-cols-1 md:grid-cols-2 md:mr-2'>
                     <CurrencyInput
                         name='paymentamount'
                         label={'Payment Amount'}

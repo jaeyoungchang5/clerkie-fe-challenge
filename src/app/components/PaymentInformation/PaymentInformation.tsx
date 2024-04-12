@@ -82,7 +82,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
             <div className='mb-4'>
                 <Title title='Payment Information' />
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2'>
+            <div className='grid grid-cols-1 md:grid-cols-2 md:gap-2'>
                 <Input 
                     name='accountnumber'
                     label={'Account Number'}
