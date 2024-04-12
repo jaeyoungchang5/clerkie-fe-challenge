@@ -10,17 +10,20 @@ const RadioGroup = ({ options }: RadioGroupProps) => {
     }
 
     return (
-        <div className='flex flex-col'>
-            <label className='' htmlFor='accounttype'>
+        <div className='grid grid-rows-4'>
+            <label className='row-span-1' htmlFor='accounttype'>
 				Account Type
 			</label>
-            <div className='flex flex-row'>
-                {options.map((option, key) => {
-                    return (
-                        <Radio key={key} name='accounttype' value={option.value} title={option.title} isChecked={selected === option.value} onChange={onChange} />
-                    )
-                })}
+            <div className='self-center row-span-2'>
+                <div className='flex flex-row'>
+                    {options.map((option, key) => {
+                        return (
+                            <Radio key={key} name='accounttype' value={option.value} title={option.title} isChecked={selected === option.value} onChange={onChange} />
+                        )
+                    })}
+                </div>
             </div>
+            <span hidden={true} className='row-span-1'></span>
         </div>
     )
 }

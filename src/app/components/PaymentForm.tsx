@@ -1,14 +1,14 @@
 'use client';
 import React, { useState } from 'react'
 import PaymentInformation from './PaymentInformation/PaymentInformation'
-import PaymentDetails from './PaymentDetails'
+import PaymentDetails from './PaymentDetails/PaymentDetails'
 import Button from './Common/Button';
 import Success from './Common/Success';
 
 const PaymentForm = () => {
 	const [didSubmit, setDidSubmit] = useState<boolean>(false);
-	const [isPaymentInfoValid, setIsPaymentInfoValid] = useState<boolean>(true);
-	const [isPaymentDetailValid, setIsPaymentDetailValid] = useState<boolean>(true);
+	const [isPaymentInfoValid, setIsPaymentInfoValid] = useState<boolean>(false);
+	const [isPaymentDetailValid, setIsPaymentDetailValid] = useState<boolean>(false);
 
 	function submitForm(formData: FormData) {
 		console.log(formData);
@@ -24,10 +24,10 @@ const PaymentForm = () => {
 	}
 
 	return (
-		<div className='flex border rounded-lg p-6 bg-white border-gray-500'>
+		<div className='flex items-center w-full md:w-[700px] min-w-60 justify-center border rounded-lg p-6 text-black bg-white border-gray-500'>
 			{
 				!didSubmit ?
-				<form action={submitForm} className='flex flex-col'>
+				<form action={submitForm} className='flex w-full flex-col'>
 					<PaymentInformation updateValidity={updatePaymentInfoValidity} />
 					<PaymentDetails updateValidity={updatePaymentDetailValidity} />
 					<Button disabled={!isPaymentInfoValid || !isPaymentDetailValid} text='Submit' type='submit' />

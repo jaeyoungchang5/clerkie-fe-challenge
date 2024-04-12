@@ -12,7 +12,6 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
 	const [accountConfirmationNumber, setAccountConfirmationNumber] = useState<string>('');
 	const [routingNumber, setRoutingNumber] = useState<string>('');
     const accountOptions: RadioButtonOption[] = demoOptions;
-demoOptions
     const [accountErrorMessage, setAccountErrorMessage] = useState<string>('');
     const [accountConfirmationErrorMessage, setAccountConfirmationErrorMessage] = useState<string>('');
     const [routingErrorMessage, setRoutingErrorMessage] = useState<string>('');
@@ -83,7 +82,7 @@ demoOptions
             <div className='mb-4'>
                 <Title title='Payment Information' />
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4'>
                 <Input 
                     name='accountnumber'
                     label={'Account Number'}
