@@ -21,7 +21,7 @@ const PaymentForm = () => {
 	}
 
 	return (
-		<div className='flex border p-5 rounded-md'>
+		<div className='flex border rounded-lg p-6 bg-white border-gray-500'>
 			<form action={submitForm} className='flex flex-col'>
 				<PaymentInformation updateValidity={updatePaymentInfoValidity} />
 				<PaymentDetails updateValidity={updatePaymentDetailValidity} />

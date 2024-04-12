@@ -4,6 +4,7 @@ import Input from './Common/Input';
 import RadioGroup from './Common/RadioGroup';
 import { AccountType, PaymentInfoProps } from '../types/';
 import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
+import Title from './Common/Title';
 
 const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
 	const [accountNumber, setAccountNumber] = useState<string>('');
@@ -78,7 +79,9 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
 
     return (
         <div className='flex flex-col'>
-            Payment Information
+            <div className='mb-4'>
+                <Title title='Payment Information' />
+            </div>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
                 <Input 
                     name='accountnumber'

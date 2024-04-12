@@ -4,6 +4,7 @@ import CurrencyInput from './Common/CurrencyInput';
 import AccountsHeader from './Account/AccountsHeader';
 import Account from './Account/Account';
 import { AccountDetails, PaymentInfoProps } from '../types/';
+import Title from './Common/Title';
 
 const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
     const [paymentAmount, setPaymentAmount] = useState<number>(0);
@@ -97,28 +98,34 @@ const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
 
     return (
         <div>
-            Payment Detail
-            <CurrencyInput
-                name='paymentamount'
-                label={'Payment Amount'}
-                value={paymentAmount}
-                errorMessage={paymentErrorMessage}
-                onChange={handlePaymentAmountChange}
-                disabled={false}
-            />
- 
-            <AccountsHeader numSelectedAccounts={numSelectedAccounts} totalBalance={totalBalance} />
+            <div className='my-6'>
+                <div className='mb-4'>
+                    <Title title='Payment Detail' />
+                </div>
+                <CurrencyInput
+                    name='paymentamount'
+                    label={'Payment Amount'}
+                    value={paymentAmount}
+                    errorMessage={paymentErrorMessage}
+                    onChange={handlePaymentAmountChange}
+                    disabled={false}
+                />
+            </div>
 
-            {Object.entries(accounts).map(([ key, account ]) => {
-                return (
-                    <Account 
-                        key={key} 
-                        account={account} 
-                        updateChecked={handleCheckedUpdate}
-                        updatePaymentAmount={handleAccountPaymentChange}
-                    />
-                )
-            })}
+            <div className='my-6'>
+                <AccountsHeader numSelectedAccounts={numSelectedAccounts} totalBalance={totalBalance} />
+
+                {Object.entries(accounts).map(([ key, account ]) => {
+                    return (
+                        <Account 
+                            key={key} 
+                            account={account} 
+                            updateChecked={handleCheckedUpdate}
+                            updatePaymentAmount={handleAccountPaymentChange}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }

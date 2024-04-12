@@ -4,6 +4,10 @@ export interface PaymentInfoProps {
     updateValidity: (isValid: boolean) => void
 }
 
+export interface TitleProps {
+	title: string,
+}
+
 export interface InputProps {
 	name: string,
 	label: string | undefined,

@@ -7,8 +7,8 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 	}
 
 	return (
-		<div className='flex flex-col'>
-			<label htmlFor={label}>
+		<div className='flex flex-col self-center'>
+			<label className='' htmlFor={label}>
 				{label}
 			</label>
 			<input
@@ -16,7 +16,7 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 				value={value}
 				placeholder={defaultText}
 				onChange={handleInputChange}
-				className={`p-2 rounded-md border-2 focus:border-3 focus:outline-none focus:ring-0 ${!errorMessage ? 'focus:border-blue-700 ' : 'border-red-600 focus:border-red-500'} ${extraInputClasses}`}
+				className={`p-2 rounded-md border-2 focus:border-3 focus:outline-none focus:ring-0 ${!errorMessage ? 'focus:border-blue-700 ' : 'border-red-300 focus:border-red-600'} ${extraInputClasses}`}
 				maxLength={30}
 				disabled={disabled}
 				autoComplete='off'

@@ -3,7 +3,9 @@ import React from 'react'
 const RadioGroup = () => {
     return (
         <div className='flex flex-col'>
-            Account Type
+            <label className='' htmlFor='accounttype'>
+				Account Type
+			</label>
             <div className='flex flex-row'>
                 <Radio />
                 <Radio />
