@@ -42,8 +42,8 @@ const Radio = ({ name, value, title, isChecked, onChange }: RadioProps) => {
 	}
 
     return (
-        <div className=''>
-            <input name={name} type='radio' checked={isChecked} value={value} onChange={handleChange} />
+        <div className='align-center'>
+            <input className='w-4 h-4' name={name} type='radio' checked={isChecked} value={value} onChange={handleChange} />
             <label className='px-2' htmlFor={name}>
                 {title}
             </label>
