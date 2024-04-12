@@ -8,11 +8,9 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 
 	return (
 		<div className='grid grid-rows-4'>
-			{label && 
-				<label className='row-span-1' htmlFor={label}>
-					{label}
-				</label>
-			}
+			<label className='row-span-1' htmlFor={label}>
+				{label}
+			</label>
 			<input
 				name={name}
 				value={value}

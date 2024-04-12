@@ -16,7 +16,7 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-12 py-2'>
-            <div className='grid col-span-4 mb-1'>
+            <div className='grid col-span-4'>
                 <div className='flex flex-row self-center'>
                     <input className='mr-4 w-5 h-5 self-center' type='checkbox' checked={account.isSelected} onChange={handleCheck} />
                     <AccountInfo name={account.name} balance={account.balance} />
