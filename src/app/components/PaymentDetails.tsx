@@ -1,11 +1,11 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react'
-import CurrencyInput from './CurrencyInput';
-import AccountsHeader from './AccountsHeader';
-import { AccountDetails, Value } from '../types';
-import Account from './Account';
+import CurrencyInput from './Common/CurrencyInput';
+import AccountsHeader from './Account/AccountsHeader';
+import Account from './Account/Account';
+import { AccountDetails, PaymentInfoProps } from '../types/';
 
-const PaymentDetails = () => {
+const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
     const [paymentAmount, setPaymentAmount] = useState<number>(0);
     const [paymentErrorMessage, setPaymentErrorMessage] = useState<string>('');
     const [accounts, setAccounts] = useState<AccountDetails[]>([
@@ -14,14 +14,27 @@ const PaymentDetails = () => {
         { name: 'C', balance:  5438, isSelected: false, accountPayment: 0 },
     ]);
 
+    const numSelectedAccounts: number = useMemo((): number => {
+        return accounts.reduce((sum, current) => sum + (current.isSelected ? 1 : 0), 0);
+    }, [accounts]);
+
     useEffect(() => {
         validatePaymentInput(paymentAmount);
     }, [paymentAmount])
 
-    const numSelectedAccounts: number = useMemo((): number => {
-        console.log('updating');
-        return accounts.reduce((sum, current) => sum + (current.isSelected ? 1 : 0), 0);
-    }, [accounts]);
+    useEffect(() => {
+        if (numSelectedAccounts == 0 || paymentAmount == 0 || !isValidPaymentAmount(paymentAmount)) {
+            updateValidity(false);
+            return;
+        }
+        for (let account of accounts) {
+            if (account.accountPayment > account.balance) {
+                updateValidity(false);
+                return;
+            }
+        }
+        updateValidity(true);
+    }, [paymentAmount, accounts])
 
     const totalBalance = accounts.reduce((sum, current) => sum + current.balance, 0);
 
@@ -71,16 +84,22 @@ const PaymentDetails = () => {
 
     function validatePaymentInput(value: number) {
         let tempErrorMessage: string = '';
-        if (value > totalBalance) {
+        if (!isValidPaymentAmount(value)) {
             tempErrorMessage = 'Payment cannot exceed total balance';
         }
         setPaymentErrorMessage(tempErrorMessage);
+    }
+
+    function isValidPaymentAmount(value: number): boolean { 
+        if (value > totalBalance) return false;
+        return true;
     }
 
     return (
         <div>
             Payment Detail
             <CurrencyInput
+                name='paymentamount'
                 label={'Payment Amount'}
                 value={paymentAmount}
                 errorMessage={paymentErrorMessage}

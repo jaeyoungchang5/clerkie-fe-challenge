@@ -1,10 +1,11 @@
 'use client';
 import React, { useEffect, useState } from 'react'
-import Input from './Input';
-import { AccountType } from '../enums';
+import Input from './Common/Input';
+import RadioGroup from './Common/RadioGroup';
+import { AccountType, PaymentInfoProps } from '../types/';
+import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
 
-
-const PaymentInformation = () => {
+const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
 	const [accountNumber, setAccountNumber] = useState<string>('');
 	const [accountConfirmationNumber, setAccountConfirmationNumber] = useState<string>('');
 	const [routingNumber, setRoutingNumber] = useState<string>('');
@@ -13,7 +14,6 @@ const PaymentInformation = () => {
     const [accountErrorMessage, setAccountErrorMessage] = useState<string>('');
     const [accountConfirmationErrorMessage, setAccountConfirmationErrorMessage] = useState<string>('');
     const [routingErrorMessage, setRoutingErrorMessage] = useState<string>('');
-    const [accountTypeErrorMessage, setAccountTypeErrorMessage] = useState<string>('');
 
     useEffect(() => {
         validateAccountInput(accountNumber, accountConfirmationNumber)
@@ -22,6 +22,14 @@ const PaymentInformation = () => {
     useEffect(() => {
         validateRoutingInput(routingNumber)
     }, [routingNumber])
+
+    useEffect(() => {
+        if (isValidAccount(accountNumber) && isValidAccount(accountConfirmationNumber) && isValidRouting(routingNumber)) {
+            updateValidity(true)
+        } else {
+            updateValidity(false);
+        }
+    }, [accountNumber, accountConfirmationNumber, routingNumber])
 
     function handleAccountChange(value: string) {
         if (isValidNumber(value)) {
@@ -45,7 +53,7 @@ const PaymentInformation = () => {
         let tempAccountErrorMessage: string = '';
         let tempAccountConfirmationErrorMessage: string = '';
 
-        if (!isValidAccount(accountNumberValue)) {
+        if (accountNumberValue !=='' && !isValidAccount(accountNumberValue)) {
             tempAccountErrorMessage = 'Account number is invalid';
         }
         if (accountNumberConfirmationValue !== accountNumberValue) {
@@ -59,58 +67,46 @@ const PaymentInformation = () => {
     function validateRoutingInput(value: string) {
         let tempErrorMessage: string = '';
 
-        if (!isValidRouting(value)) {
+        if (value !=='' && !isValidRouting(value)) {
             tempErrorMessage = 'Routing number is invalid';
         }
 
         setRoutingErrorMessage(tempErrorMessage);
     }
 
-    function isValidNumber(value: string): boolean {
-        if (value === '') return true;
-        if (isNaN(+value)) return false;
-        const regex = new RegExp(/^\d+$/)
-        return regex.test(value);
-    }
-
-    function isValidAccount(value: string): boolean {
-        if (value === '') return true;
-        if (!isValidNumber(value)) return false;
-        const regex = new RegExp(/^\d{9,18}$/);
-        return regex.test(value);
-    }
-
-    function isValidRouting(value: string): boolean {
-        if (value === '') return true;
-        if (!isValidNumber(value)) return false;
-        const regex = new RegExp(/^\d{9}$/);
-        return regex.test(value.toString());
-    }
+    
 
     return (
-        <div>
+        <div className='flex flex-col'>
             Payment Information
-            <Input 
-                label={'Account Number'}
-                defaultText={'Account number'}
-                value={accountNumber}
-                errorMessage={accountErrorMessage}
-                onChange={handleAccountChange}
-            />
-            <Input 
-                label={'Confirm Account Number'}
-                defaultText={'Account number'}
-                value={accountConfirmationNumber}
-                errorMessage={accountConfirmationErrorMessage}
-                onChange={handleAccountConfirmationChange}
-            />
-            <Input 
-                label={'Routing Number'}
-                defaultText={'Routing number'}
-                value={routingNumber}
-                errorMessage={routingErrorMessage}
-                onChange={handleRoutingChange}
-            />
+            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                <Input 
+                    name='accountnumber'
+                    label={'Account Number'}
+                    defaultText={'Account number'}
+                    value={accountNumber}
+                    errorMessage={accountErrorMessage}
+                    onChange={handleAccountChange}
+                />
+                <Input 
+                    name='confirmaccountnumber'
+                    label={'Confirm Account Number'}
+                    defaultText={'Account number'}
+                    value={accountConfirmationNumber}
+                    errorMessage={accountConfirmationErrorMessage}
+                    onChange={handleAccountConfirmationChange}
+                />
+                <Input 
+                    name='routingnumber'
+                    label={'Routing Number'}
+                    defaultText={'Routing number'}
+                    value={routingNumber}
+                    errorMessage={routingErrorMessage}
+                    onChange={handleRoutingChange}
+                />
+                <RadioGroup />
+
+            </div>
         </div>
     )
 }

@@ -1,16 +1,12 @@
 import React from 'react'
-
-interface AccountsHeaderProps {
-    numSelectedAccounts: number,
-    totalBalance: number
-}
+import { AccountsHeaderProps } from '../../types/'
+import { numToCurrency } from '@/app/utilities/'
 
 const AccountsHeader = ({ numSelectedAccounts, totalBalance }: AccountsHeaderProps) => {
     return (
         <div>
             Account Lists: {numSelectedAccounts} Account{numSelectedAccounts !== 1 && 's'} Selected
-            <p>Total Balance: ${totalBalance}</p>
-
+            <p>Total Balance: {numToCurrency(totalBalance)}</p>
         </div>
     )
 }
