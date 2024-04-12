@@ -27,7 +27,7 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
                     errorMessage={errorMessage}
                     disabled={!account.isSelected}
                     onChange={handleChange}
-                    extraInputClasses='text-right'
+                    extraInputClasses={`text-right ${!account.isSelected && 'bg-gray-200'}`}
                 />
             </div>
         </div>
