@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react'
 import Input from '../Common/Input';
-import RadioGroup from './RadioGroup';
+import RadioGroup from '../Common/RadioGroup';
 import Title from '../Common/Title';
 import { PaymentInfoProps, RadioButtonOption } from '../../types';
 import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
@@ -82,7 +82,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
             <div className='mb-4'>
                 <Title title='Payment Information' />
             </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 md:gap-4'>
+            <div className='grid grid-cols-1 md:grid-cols-2'>
                 <Input 
                     name='accountnumber'
                     label={'Account Number'}
@@ -107,7 +107,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
                     errorMessage={routingErrorMessage}
                     onChange={handleRoutingChange}
                 />
-                <RadioGroup options={accountOptions} />
+                <RadioGroup label='Account Type' options={accountOptions} />
             </div>
         </div>
     )

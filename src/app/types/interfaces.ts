@@ -53,5 +53,6 @@ export interface AccountInfoProps {
 }
 
 export interface RadioGroupProps {
+	label: string,
 	options: RadioButtonOption[]
 }

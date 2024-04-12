@@ -2,7 +2,7 @@ import { RadioGroupProps } from '@/app/types';
 import React, { useState } from 'react'
 
 
-const RadioGroup = ({ options }: RadioGroupProps) => {
+const RadioGroup = ({ label, options }: RadioGroupProps) => {
     const [selected, setSelected] = useState<string>(options[0].value);
 
     function onChange(value: string) {
@@ -12,7 +12,7 @@ const RadioGroup = ({ options }: RadioGroupProps) => {
     return (
         <div className='grid grid-rows-4'>
             <label className='row-span-1' htmlFor='accounttype'>
-				Account Type
+				{label}
 			</label>
             <div className='self-center row-span-2'>
                 <div className='flex flex-row'>

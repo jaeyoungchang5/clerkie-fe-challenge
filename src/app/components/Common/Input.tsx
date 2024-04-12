@@ -7,7 +7,7 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 	}
 
 	return (
-		<div className='grid grid-rows-4'>
+		<div className='grid grid-rows-4 mr-4'>
 			<label className='row-span-1' htmlFor={label}>
 				{label}
 			</label>

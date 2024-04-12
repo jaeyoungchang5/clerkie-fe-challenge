@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react'
 import CurrencyInput from '../Common/CurrencyInput';
-import AccountsHeader from '../Account/AccountsHeader';
-import Account from '../Account/Account';
+import AccountsHeader from '../Accounts/AccountsHeader';
+import Account from '../Accounts/Account';
 import { AccountDetails, PaymentInfoProps } from '../../types';
 import Title from '../Common/Title';
 import { demoAccounts } from '../../../../demo_data';
@@ -94,19 +94,21 @@ const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
     }
 
     return (
-        <div>
+        <div className='flex flex-col'>
             <div className='my-6'>
                 <div className='mb-4'>
                     <Title title='Payment Detail' />
                 </div>
-                <CurrencyInput
-                    name='paymentamount'
-                    label={'Payment Amount'}
-                    value={paymentAmount}
-                    errorMessage={paymentErrorMessage}
-                    onChange={handlePaymentAmountChange}
-                    disabled={false}
-                />
+                <div className='grid grid-cols-1 md:grid-cols-2'>
+                    <CurrencyInput
+                        name='paymentamount'
+                        label={'Payment Amount'}
+                        value={paymentAmount}
+                        errorMessage={paymentErrorMessage}
+                        onChange={handlePaymentAmountChange}
+                        disabled={false}
+                    />
+                </div>
             </div>
 
             <div className='my-6'>
