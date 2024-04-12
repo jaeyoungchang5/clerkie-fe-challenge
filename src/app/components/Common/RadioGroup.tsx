@@ -1,6 +1,5 @@
-import { RadioGroupProps } from '@/app/types';
 import React, { useState } from 'react'
-
+import { RadioGroupProps } from '@/app/types';
 
 const RadioGroup = ({ label, options }: RadioGroupProps) => {
     const [selected, setSelected] = useState<string>(options[0].value);

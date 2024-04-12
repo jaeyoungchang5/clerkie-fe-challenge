@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useMemo, useState } from 'react'
 import CurrencyInput from '../Common/CurrencyInput';
+import Title from '../Common/Title';
 import AccountsHeader from '../Accounts/AccountsHeader';
 import Account from '../Accounts/Account';
-import { AccountDetails, PaymentInfoProps } from '../../types';
-import Title from '../Common/Title';
+import { AccountDetails, PaymentInfoProps } from '@/app/types';
 import { demoAccounts } from '../../../../demo_data';
 
 const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {

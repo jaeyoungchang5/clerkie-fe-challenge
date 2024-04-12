@@ -1,5 +1,5 @@
 import React from 'react'
-import { AccountsHeaderProps } from '../../types'
+import { AccountsHeaderProps } from '@/app/types'
 import { numToCurrency } from '@/app/utilities/'
 import Title from '../Common/Title'
 

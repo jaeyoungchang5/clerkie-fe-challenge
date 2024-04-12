@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonProps } from '../../types/'
+import { ButtonProps } from '@/app/types/'
 
 const Button = ({ text, type, disabled = false }: ButtonProps) => {
     return (

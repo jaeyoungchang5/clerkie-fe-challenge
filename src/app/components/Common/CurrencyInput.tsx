@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import Input from './Input';
-import { CurrencyInputProps } from '../../types/';
+import { CurrencyInputProps } from '@/app/types/';
 import { currencyToNum, numToCurrency } from '@/app/utilities/';
 
 const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage, disabled, extraInputClasses, onChange }: CurrencyInputProps) => {

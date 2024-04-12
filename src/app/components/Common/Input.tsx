@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputProps } from '../../types/';
+import { InputProps } from '@/app/types/';
 
 const Input = ({ name, label, defaultText, value, errorMessage, disabled = false, extraInputClasses, onChange }: InputProps) => {
 	function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {

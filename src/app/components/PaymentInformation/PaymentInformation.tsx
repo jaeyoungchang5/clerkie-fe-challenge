@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Input from '../Common/Input';
 import RadioGroup from '../Common/RadioGroup';
 import Title from '../Common/Title';
-import { PaymentInfoProps, RadioButtonOption } from '../../types';
+import { PaymentInfoProps, RadioButtonOption } from '@/app/types';
 import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
 import { demoOptions } from '../../../../demo_data';
 

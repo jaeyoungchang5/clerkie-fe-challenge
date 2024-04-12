@@ -1,8 +1,11 @@
 import React from 'react'
+import { SuccessProps } from '@/app/types'
 
-const Success = () => {
+const Success = ({ successText }: SuccessProps) => {
     return (
-        <div>Success</div>
+        <div className='flex w-full h-96 items-center justify-center'>
+            <p className='flex'>{successText}</p>
+        </div>
     )
     }
 

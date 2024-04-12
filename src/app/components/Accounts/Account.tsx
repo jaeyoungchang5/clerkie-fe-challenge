@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import CurrencyInput from '../Common/CurrencyInput';
-import { AccountInfoProps, AccountProps } from '../../types';
+import { AccountInfoProps, AccountProps } from '@/app/types';
 import { numToCurrency, isValidAccountPayment } from '@/app/utilities/';
 
 const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) => {

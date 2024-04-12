@@ -56,3 +56,7 @@ export interface RadioGroupProps {
 	label: string,
 	options: RadioButtonOption[]
 }
+
+export interface SuccessProps {
+	successText: string,
+}
