@@ -9,3 +9,8 @@ export type AccountDetails = {
     isSelected: boolean,
     accountPayment: number,
 }
+
+export type RadioButtonOption = {
+    value: string,
+    title: string,
+}

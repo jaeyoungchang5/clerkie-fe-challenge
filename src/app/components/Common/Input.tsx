@@ -7,7 +7,7 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 	}
 
 	return (
-		<div className='flex flex-col self-center'>
+		<div className='flex flex-col'>
 			<label className='' htmlFor={label}>
 				{label}
 			</label>
@@ -21,9 +21,9 @@ const Input = ({ name, label, defaultText, value, errorMessage, disabled = false
 				disabled={disabled}
 				autoComplete='off'
 			/>
-			<p hidden={errorMessage === ''} className={`italic text-red-600 text-xs ${extraInputClasses}`}>
+			<span hidden={errorMessage === ''} className={`italic text-red-600 text-xs ${extraInputClasses}`}>
 				{errorMessage}
-			</p>
+			</span>
 		</div>
 	)
 }

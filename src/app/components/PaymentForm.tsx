@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react'
-import PaymentInformation from './PaymentInformation'
+import PaymentInformation from './PaymentInformation/PaymentInformation'
 import PaymentDetails from './PaymentDetails'
 import Button from './Common/Button';
 import Success from './Common/Success';

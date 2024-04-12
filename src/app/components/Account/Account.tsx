@@ -20,14 +20,16 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
                 <input className='mr-4' type='checkbox' checked={account.isSelected} onChange={handleCheck} />
                 <AccountInfo name={account.name} balance={account.balance} />
             </div>
-            <CurrencyInput 
-                name={`account_${account.name}`}
-                value={account.accountPayment}
-                errorMessage={errorMessage}
-                disabled={!account.isSelected}
-                onChange={handleChange}
-                extraInputClasses='text-right'
-            />
+            <div className=''>
+                <CurrencyInput 
+                    name={`account_${account.name}`}
+                    value={account.accountPayment}
+                    errorMessage={errorMessage}
+                    disabled={!account.isSelected}
+                    onChange={handleChange}
+                    extraInputClasses='text-right'
+                />
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import { AccountDetails } from "./types"
+import { AccountDetails, RadioButtonOption } from "./types"
 
 export interface PaymentInfoProps {
     updateValidity: (isValid: boolean) => void
@@ -50,4 +50,8 @@ export interface AccountsHeaderProps {
 export interface AccountInfoProps {
     name: string,
     balance: number
+}
+
+export interface RadioGroupProps {
+	options: RadioButtonOption[]
 }
