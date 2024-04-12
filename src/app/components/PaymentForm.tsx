@@ -24,7 +24,7 @@ const PaymentForm = () => {
 	}
 
 	return (
-		<div className='flex items-center w-full md:w-[700px] min-w-60 justify-center border rounded-lg p-6 text-black bg-white border-gray-500'>
+		<div className='flex items-center w-full md:w-[700px] min-w-60 justify-center border rounded-lg p-6 text-black text-left bg-white border-gray-500'>
 			{
 				!didSubmit ?
 				<form action={submitForm} className='flex w-full flex-col'>

@@ -95,7 +95,7 @@ const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
 
     return (
         <div className='flex flex-col'>
-            <div className='my-6'>
+            <div className='my-4'>
                 <div className='mb-4'>
                     <Title title='Payment Detail' />
                 </div>
