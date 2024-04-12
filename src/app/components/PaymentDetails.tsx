@@ -5,15 +5,12 @@ import AccountsHeader from './Account/AccountsHeader';
 import Account from './Account/Account';
 import { AccountDetails, PaymentInfoProps } from '../types/';
 import Title from './Common/Title';
+import { demoAccounts } from '../../../demo_data';
 
 const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
     const [paymentAmount, setPaymentAmount] = useState<number>(0);
     const [paymentErrorMessage, setPaymentErrorMessage] = useState<string>('');
-    const [accounts, setAccounts] = useState<AccountDetails[]>([
-        { name: 'A', balance: 45156, isSelected: false, accountPayment: 0 },
-        { name: 'B', balance: 14901, isSelected: false, accountPayment: 0 },
-        { name: 'C', balance:  5438, isSelected: false, accountPayment: 0 },
-    ]);
+    const [accounts, setAccounts] = useState<AccountDetails[]>(demoAccounts);
 
     const numSelectedAccounts: number = useMemo((): number => {
         return accounts.reduce((sum, current) => sum + (current.isSelected ? 1 : 0), 0);

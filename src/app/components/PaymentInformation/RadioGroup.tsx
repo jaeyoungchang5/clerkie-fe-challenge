@@ -1,4 +1,4 @@
-import { AccountType, RadioGroupProps } from '@/app/types';
+import { RadioGroupProps } from '@/app/types';
 import React, { useState } from 'react'
 
 

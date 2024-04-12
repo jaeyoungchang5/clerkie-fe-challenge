@@ -3,19 +3,16 @@ import React, { useEffect, useState } from 'react'
 import Input from '../Common/Input';
 import RadioGroup from './RadioGroup';
 import Title from '../Common/Title';
-import { AccountType, PaymentInfoProps, RadioButtonOption } from '../../types';
+import { PaymentInfoProps, RadioButtonOption } from '../../types';
 import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
+import { demoOptions } from '../../../../demo_data';
 
 const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
 	const [accountNumber, setAccountNumber] = useState<string>('');
 	const [accountConfirmationNumber, setAccountConfirmationNumber] = useState<string>('');
 	const [routingNumber, setRoutingNumber] = useState<string>('');
-	const [accountType, setAccountType] = useState<AccountType>(AccountType.Checking);
-    const options: RadioButtonOption[] = [
-        { value: 'checkingaccount', title: 'Checking' },
-        { value: 'savingsaccount', title: 'Savings' },
-    ]
-
+    const accountOptions: RadioButtonOption[] = demoOptions;
+demoOptions
     const [accountErrorMessage, setAccountErrorMessage] = useState<string>('');
     const [accountConfirmationErrorMessage, setAccountConfirmationErrorMessage] = useState<string>('');
     const [routingErrorMessage, setRoutingErrorMessage] = useState<string>('');
@@ -111,7 +108,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
                     errorMessage={routingErrorMessage}
                     onChange={handleRoutingChange}
                 />
-                <RadioGroup options={options} />
+                <RadioGroup options={accountOptions} />
             </div>
         </div>
     )
