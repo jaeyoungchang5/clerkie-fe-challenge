@@ -1,9 +1,12 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Input from './Input';
 import { CurrencyInputProps } from '@/app/types/';
-import { currencyToNum, numToCurrency } from '@/app/utilities/';
+import { inputStringToCurrencyNum, numToCurrency } from '@/app/utilities/';
 
 const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage, disabled, extraInputClasses, onChange }: CurrencyInputProps) => {
+	const [cursor, setCursor] = useState<number | null>(null);
+	const ref = useRef<HTMLInputElement>(null);
+
     const formattedString: string = useMemo((): string => {
         if (!value) {
             return ''
@@ -11,19 +14,17 @@ const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage
         return numToCurrency(value);
     }, [value]);
 
+	useEffect(() => {
+		ref.current?.setSelectionRange(cursor, cursor);
+	}, [ref, cursor, value])
+
 	function handleInputChange(value: string) {
-        let numberValue = currencyToNum(value)
+        let numberValue = inputStringToCurrencyNum(value)
 		if (!isNaN(numberValue)) {
 			onChange(numberValue);
 		}
+		setCursor(-1);
 	}
-
-    function handleOnKeyUp(event: React.KeyboardEvent<HTMLInputElement>) {
-        const { key, currentTarget: { selectionStart } } = event;
-        if (key !== 'ArrowUp' && key !== 'ArrowDown') {
-
-        }
-    }
 
 	return (
 		<Input
@@ -34,6 +35,7 @@ const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage
 			errorMessage={errorMessage}
 			disabled={disabled}
 			extraInputClasses={extraInputClasses}
+			ref={ref}
 			onChange={handleInputChange}
 		/>
 	)

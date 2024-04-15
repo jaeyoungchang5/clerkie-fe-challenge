@@ -20,7 +20,7 @@ export interface InputProps {
 	errorMessage: string,
 	disabled?: boolean,
 	extraInputClasses?: string,
-	onChange: (value: string) => void,
+	onChange: (value: string, event?: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
 export interface CurrencyInputProps {

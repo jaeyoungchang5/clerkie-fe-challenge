@@ -7,3 +7,10 @@ export function numToCurrency(value: number): string {
 export function currencyToNum(value: string): number {
     return Number(value.replace(/[\$,-]/g, ''));
 }
+
+export function inputStringToCurrencyNum(value: string): number {
+    let strippedString = `0${value.replace(/[\$,-.]/g, '')}`;
+    let strippedLength = strippedString.length;
+    let newString = [strippedString.slice(0, strippedLength-2), strippedString.slice(strippedLength-2)].join('.');
+    return Number(newString);
+}
