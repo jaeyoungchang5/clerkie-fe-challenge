@@ -25,7 +25,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
     }, [routingNumber])
 
     useEffect(() => {
-        if (isValidAccount(accountNumber) && isValidAccount(accountConfirmationNumber) && isValidRouting(routingNumber)) {
+        if (isValidAccount(accountNumber) && isValidAccount(accountConfirmationNumber) && isValidRouting(routingNumber) && accountNumber == accountConfirmationNumber) {
             updateValidity(true)
         } else {
             updateValidity(false);
