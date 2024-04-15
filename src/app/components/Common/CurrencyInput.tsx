@@ -4,7 +4,6 @@ import { CurrencyInputProps } from '@/app/types/';
 import { inputStringToCurrencyNum, numToCurrency } from '@/app/utilities/';
 
 const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage, disabled, extraInputClasses, onChange }: CurrencyInputProps) => {
-	const [cursor, setCursor] = useState<number | null>(null);
 	const ref = useRef<HTMLInputElement>(null);
 
     const formattedString: string = useMemo((): string => {
@@ -15,15 +14,14 @@ const CurrencyInput = ({ name, label, defaultText = '$0.00', value, errorMessage
     }, [value]);
 
 	useEffect(() => {
-		ref.current?.setSelectionRange(cursor, cursor);
-	}, [ref, cursor, value])
+		ref.current?.setSelectionRange(-1, -1);
+	}, [ref, value])
 
 	function handleInputChange(value: string) {
         let numberValue = inputStringToCurrencyNum(value)
 		if (!isNaN(numberValue)) {
 			onChange(numberValue);
 		}
-		setCursor(-1);
 	}
 
 	return (
