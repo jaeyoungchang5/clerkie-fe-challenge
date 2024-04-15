@@ -1,6 +1,6 @@
 import React from 'react'
 import CurrencyInput from '../Common/CurrencyInput';
-import { AccountInfoProps, AccountProps } from '@/app/types';
+import { AccountInfoProps, AccountProps, FormResponseNames } from '@/app/types';
 import { numToCurrency, isValidAccountPayment } from '@/app/utilities/';
 
 const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) => {
@@ -25,7 +25,7 @@ const Account = ({ account, updateChecked, updatePaymentAmount }: AccountProps) 
             <span className='col-span-4'></span>
             <div className='col-span-4'>
                 <CurrencyInput 
-                    name={`account_${account.name}`}
+                    name={`${FormResponseNames.AccountPaymentPrefix}${account.name}`}
                     value={account.accountPayment}
                     errorMessage={errorMessage}
                     disabled={!account.isSelected}

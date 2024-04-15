@@ -4,16 +4,58 @@ import PaymentInformation from './PaymentInformation/PaymentInformation'
 import PaymentDetails from './PaymentDetails/PaymentDetails'
 import Button from './Common/Button';
 import Success from './Common/Success';
+import { AccountType, FormResponse, FormResponseNames, PaymentFormProps } from '@/app/types';
+import { currencyToNum, isValidAccount, isValidRouting } from '@/app/utilities';
 
-const PaymentForm = () => {
+const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
 	const [didSubmit, setDidSubmit] = useState<boolean>(false);
 	const [isPaymentInfoValid, setIsPaymentInfoValid] = useState<boolean>(false);
 	const [isPaymentDetailValid, setIsPaymentDetailValid] = useState<boolean>(false);
 
-	function submitForm(formData: FormData) {
-		console.log('The following form data has been successfully submitted:');
-		console.log(formData);
+	function submitForm(rawData: FormData) {
+		const formData: FormResponse = {
+			accountNumber: null,
+			routingNumber: null,
+			accountType: null,
+			paymentAmount: null,
+			accountPayments: [],
+			errors: []
+		}
+
+		let accountNumber = rawData.get(FormResponseNames.AccountNumber)?.toString();
+		if (accountNumber && isValidAccount(accountNumber)) {
+			formData.accountNumber = accountNumber
+		} else {
+			formData.errors.push('Invalid account number');
+		}
+
+		let routingNumber = rawData.get(FormResponseNames.RoutingNumber)?.toString();
+		if (routingNumber && isValidRouting(routingNumber)) {
+			formData.routingNumber = routingNumber
+		} else {
+			formData.errors.push('Invalid routing number');
+		}
+
+		let accountType = rawData.get(FormResponseNames.AccountType)?.toString();
+		switch (accountType) {
+			case AccountType.Checking:
+			case AccountType.Savings:
+				formData.accountType = accountType;
+		}
+
+		formData.paymentAmount = currencyToNum(rawData.get(FormResponseNames.PaymentAmount)?.toString() || '');
+
+		rawData.forEach((value, key) => {
+			if (key.startsWith(FormResponseNames.AccountPaymentPrefix, 0)) {
+				formData.accountPayments.push({
+					name: key,
+					accountPayment: currencyToNum(value.toString())
+				})
+			}
+		})
+
 		setDidSubmit(true);
+		onSubmit(formData);
 	}
 
 	function updatePaymentInfoValidity(isValid: boolean) {

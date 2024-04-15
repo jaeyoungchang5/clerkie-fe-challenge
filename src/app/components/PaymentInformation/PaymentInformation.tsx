@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Input from '../Common/Input';
 import RadioGroup from '../Common/RadioGroup';
 import Title from '../Common/Title';
-import { PaymentInfoProps, RadioButtonOption } from '@/app/types';
+import { FormResponseNames, PaymentInfoProps, RadioButtonOption } from '@/app/types';
 import { isValidAccount, isValidNumber, isValidRouting } from '@/app/utilities/';
 import { demoOptions } from '../../../../demo_data';
 
@@ -84,7 +84,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
             </div>
             <div className='grid grid-cols-1 md:grid-cols-2 md:gap-2'>
                 <Input 
-                    name='accountnumber'
+                    name={FormResponseNames.AccountNumber}
                     label={'Account Number'}
                     defaultText={'Account number'}
                     value={accountNumber}
@@ -92,7 +92,7 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
                     onChange={handleAccountChange}
                 />
                 <Input 
-                    name='confirmaccountnumber'
+                    name={FormResponseNames.ConfirmAccountNumber}
                     label={'Confirm Account Number'}
                     defaultText={'Account number'}
                     value={accountConfirmationNumber}
@@ -100,14 +100,14 @@ const PaymentInformation = ({ updateValidity }: PaymentInfoProps) => {
                     onChange={handleAccountConfirmationChange}
                 />
                 <Input 
-                    name='routingnumber'
+                    name={FormResponseNames.RoutingNumber}
                     label={'Routing Number'}
                     defaultText={'Routing number'}
                     value={routingNumber}
                     errorMessage={routingErrorMessage}
                     onChange={handleRoutingChange}
                 />
-                <RadioGroup label='Account Type' options={accountOptions} />
+                <RadioGroup name={FormResponseNames.AccountType} label='Account Type' options={accountOptions} />
             </div>
         </div>
     )

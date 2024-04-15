@@ -1,8 +1,8 @@
-import { AccountDetails, RadioButtonOption } from "@/app/types";
+import { AccountDetails, AccountType, RadioButtonOption } from "@/app/types";
 
 export const demoOptions: RadioButtonOption[] = [
-    { value: 'checkingaccount', title: 'Checking' },
-    { value: 'savingsaccount', title: 'Savings' },
+    { value: AccountType.Checking, title: 'Checking' },
+    { value: AccountType.Savings, title: 'Savings' },
 ]
 
 export const demoAccounts: AccountDetails[] = [

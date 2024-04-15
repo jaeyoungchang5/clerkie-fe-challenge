@@ -4,7 +4,7 @@ import CurrencyInput from '../Common/CurrencyInput';
 import Title from '../Common/Title';
 import AccountsHeader from '../Accounts/AccountsHeader';
 import Account from '../Accounts/Account';
-import { AccountDetails, PaymentInfoProps } from '@/app/types';
+import { AccountDetails, FormResponseNames, PaymentInfoProps } from '@/app/types';
 import { demoAccounts } from '../../../../demo_data';
 
 const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
@@ -101,7 +101,7 @@ const PaymentDetails = ({ updateValidity }: PaymentInfoProps) => {
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 md:mr-2'>
                     <CurrencyInput
-                        name='paymentamount'
+                        name={FormResponseNames.PaymentAmount}
                         label={'Payment Amount'}
                         value={paymentAmount}
                         errorMessage={paymentErrorMessage}

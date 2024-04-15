@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { RadioGroupProps } from '@/app/types';
+import { RadioGroupProps, RadioProps } from '@/app/types';
 
-const RadioGroup = ({ label, options }: RadioGroupProps) => {
+const RadioGroup = ({ label, name, options }: RadioGroupProps) => {
     const [selected, setSelected] = useState<string>(options[0].value);
 
     function onChange(value: string) {
@@ -10,14 +10,14 @@ const RadioGroup = ({ label, options }: RadioGroupProps) => {
 
     return (
         <div className='grid grid-rows-4'>
-            <label className='row-span-1' htmlFor='accounttype'>
+            <label className='row-span-1' htmlFor={name}>
 				{label}
 			</label>
             <div className='self-center row-span-2'>
                 <div className='flex flex-row'>
                     {options.map((option, key) => {
                         return (
-                            <Radio key={key} name='accounttype' value={option.value} title={option.title} isChecked={selected === option.value} onChange={onChange} />
+                            <Radio key={key} name={name} value={option.value} title={option.title} isChecked={selected === option.value} onChange={onChange} />
                         )
                     })}
                 </div>
@@ -27,13 +27,6 @@ const RadioGroup = ({ label, options }: RadioGroupProps) => {
     )
 }
 
-interface RadioProps {
-    name: string,
-    value: string,
-    title: string,
-    isChecked: boolean, 
-    onChange: (value: string) => void
-}
 const Radio = ({ name, value, title, isChecked, onChange }: RadioProps) => {
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {

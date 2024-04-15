@@ -1,4 +1,8 @@
-import { AccountDetails, RadioButtonOption } from "./types"
+import { AccountDetails, FormResponse, RadioButtonOption } from "./types"
+
+export interface PaymentFormProps {
+	onSubmit: (formData: FormResponse) => void
+}
 
 export interface PaymentInfoProps {
     updateValidity: (isValid: boolean) => void
@@ -54,7 +58,16 @@ export interface AccountInfoProps {
 
 export interface RadioGroupProps {
 	label: string,
+	name: string,
 	options: RadioButtonOption[]
+}
+
+export interface RadioProps {
+    name: string,
+    value: string,
+    title: string,
+    isChecked: boolean, 
+    onChange: (value: string) => void
 }
 
 export interface SuccessProps {

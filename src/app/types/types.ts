@@ -1,16 +1,25 @@
-export type Value = {
-    value: number,
-    errorMessage?: string,
+import { AccountType } from "./enums"
+
+export type FormResponse = {
+    accountNumber: string | null,
+    routingNumber: string | null,
+    accountType: AccountType | null,
+    paymentAmount: number | null,
+    accountPayments: Account[],
+    errors: string[],
 }
 
-export type AccountDetails = {
+export type Account = {
     name: string,
+    accountPayment: number
+}
+
+export type AccountDetails = Account & {
     balance: number,
     isSelected: boolean,
-    accountPayment: number,
 }
 
 export type RadioButtonOption = {
-    value: string,
+    value: AccountType,
     title: string,
 }
