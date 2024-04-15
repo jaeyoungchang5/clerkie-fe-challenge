@@ -23,7 +23,8 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
 		}
 
 		let accountNumber = rawData.get(FormResponseNames.AccountNumber)?.toString();
-		if (accountNumber && isValidAccount(accountNumber)) {
+		let accountConfirmationNumber = rawData.get(FormResponseNames.ConfirmAccountNumber)?.toString();
+		if (accountNumber && accountConfirmationNumber && isValidAccount(accountNumber) && isValidAccount(accountConfirmationNumber)) {
 			formData.accountNumber = accountNumber
 		} else {
 			formData.errors.push('Invalid account number');
@@ -41,6 +42,9 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
 			case AccountType.Checking:
 			case AccountType.Savings:
 				formData.accountType = accountType;
+				break;
+			default:
+				formData.errors.push('Invalid account type');
 		}
 
 		formData.paymentAmount = currencyToNum(rawData.get(FormResponseNames.PaymentAmount)?.toString() || '');
@@ -53,9 +57,14 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
 				})
 			}
 		})
+		if (formData.accountPayments.length == 0) {
+			formData.errors.push('No accounts selected');
+		}
 
-		setDidSubmit(true);
-		onSubmit(formData);
+		if (formData.errors.length == 0) {
+			setDidSubmit(true);
+			onSubmit(formData);	
+		}
 	}
 
 	function updatePaymentInfoValidity(isValid: boolean) {
